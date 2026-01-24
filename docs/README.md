@@ -1,4 +1,4 @@
-Music Streaming Platform API (Example Explanation)
+Music Streaming Platform 
 
 
 Explanation of Controller Responsibilities:
