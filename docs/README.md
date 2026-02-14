@@ -77,3 +77,68 @@ The project includes several advanced Java features:
 - Reflection utilities to inspect class metadata
 - Dependency inversion through repository interfaces
 
+REST API Extension
+
+In addition to the console demonstration, the project includes a Spring Boot REST layer that exposes the user management functionality as an HTTP API.
+
+The REST controller provides full CRUD operations:
+
+- GET /users — retrieve all users
+- GET /users/{id} — retrieve a specific user
+- POST /users — create a new user
+- PUT /users/{id} — update an existing user
+- DELETE /users/{id} — delete a user
+
+This layer follows the same architecture principles as the console version:
+Controller → Service → Repository → Database.
+
+The REST API allows external clients (Postman, browser, frontend apps) to interact with the system.
+
+
+Validation Layer
+Bean validation is applied to prevent invalid data from entering the system.
+
+The User entity uses validation annotations such as:
+
+- @NotBlank — prevents empty usernames
+
+Validation is automatically triggered when a request is sent to the API.  
+If invalid data is provided, the request is rejected before reaching the database.
+
+This guarantees data consistency and protects business rules.
+
+DTO Layer
+The project introduces a DTO (Data Transfer Object) layer to separate internal entities from API contracts.
+
+UserDTO is used to transfer user data between the client and the controller without exposing the full entity model.
+
+Benefits:
+- protects internal structure
+- prevents overexposure of database fields
+- allows future API evolution without breaking persistence logic
+
+This separation improves maintainability and scalability.
+
+Design Patterns
+Several classic design patterns are implemented to demonstrate advanced software design:
+
+Singleton  
+AppConfig is implemented as a Singleton to ensure a single shared configuration instance across the application.
+
+Factory  
+UserFactory centralizes object creation and hides construction logic from the controller and services.
+
+Builder  
+UserBuilder provides step-by-step object construction and improves readability when creating complex objects.
+
+These patterns demonstrate controlled object lifecycle management and clean creation logic.
+
+Error Handling
+A global exception handler is used to convert runtime errors into readable API responses.
+GlobalExceptionHandler ensures:
+
+- consistent error messages
+- safe application behavior
+- no server crashes on invalid input
+
+This improves robustness and developer experience when testing the API.
