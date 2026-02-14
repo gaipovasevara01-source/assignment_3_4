@@ -142,3 +142,16 @@ GlobalExceptionHandler ensures:
 - no server crashes on invalid input
 
 This improves robustness and developer experience when testing the API.
+
+Caching Layer
+
+The system implements an in-memory cache using a Singleton pattern.
+Frequently accessed endpoints (GET /users) are cached to reduce database load.
+
+Cache behavior:
+- First request → loads from database
+- Repeated request → served from cache
+- Create/update/delete → cache invalidated automatically
+- Manual clear available via DELETE /cache
+
+This demonstrates performance optimization while preserving layered architecture.
